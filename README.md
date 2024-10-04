@@ -16,3 +16,6 @@ add middelware from route **bot_block**
 
 add from admin menu route
 >{{route('bots.index')}}
+
+clear client list (recomended)
+>$schedule->command('delelte:list')->daily();
