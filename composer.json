@@ -1,0 +1,31 @@
+{
+    "name": "fazanis/laravel-block-bots",
+    "description": "block bots clicker",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "Fazanis\\LaravelBlockBots\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Alexandr",
+            "email": "web.master.88@mail.ru"
+        }
+    ],
+    "require": {
+        "php" : "^7.1 || ^8.0 || ^8.1 || ^8.2",
+        "laravel/framework": "^5.5|^6.0|^7.0|^8.0|^9.0|^10.0",
+        "jenssegers/agent": "^2.6",
+        "mews/captcha": "^3.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Fazanis\\LaravelBlockBots\\Providers\\LaravelBlockBotsServiceProvider"
+            ]
+        }
+    }
+}
