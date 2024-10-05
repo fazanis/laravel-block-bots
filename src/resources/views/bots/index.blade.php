@@ -1,5 +1,5 @@
-<a href="{{route('bots.trush')}}" class="btn btn-dunger">Очистить</a>
-<a href="{{route('botsList.index')}}" class="btn btn-dunger">Список ботов</a>
+<a href="{{route('bots.trush')}}" class="btn btn-danger" onclick="return confirm('Вы уверенны?')">Очистить</a>
+<a href="{{route('botsList.index')}}" class="btn btn-primary">Список ботов</a>
 <table class="table">
     <thead>
         <th>

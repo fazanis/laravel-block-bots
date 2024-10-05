@@ -1,5 +1,6 @@
-<a href="{{route('bots.index')}}" class="btn btn-dunger">Назад</a>
+<a href="{{route('bots.index')}}" class="btn btn-warning">Назад</a>
 Все боты
+
 <table class="table">
     <thead>
         <th>
@@ -14,7 +15,9 @@
             <td>{{$bot->id}}</td>
             <td><span style="background: {{in_array($bot->name,$array) ? 'red' : 'green'}}"> {{$bot->name}}</span></td>
             <td>
-                <a href="{{route('bots.block',$bot)}}" class="btn btn-primary" style="{{in_array($bot->name,$array) ? 'display:none' : 'display:inline'}}">Заблокировать</a>
+                <a href="{{route('bots.block',$bot->name)}}" class="btn btn-primary" style="{{in_array($bot->name,$array) ? 'display:none' : 'display:inline'}}"
+                   onclick="return confirm('Вы уверенны?')"
+                >Заблокировать</a>
 {{--                <a href="" class="btn btn-primary" >Удалить</a>--}}
             </td>
         </tr>

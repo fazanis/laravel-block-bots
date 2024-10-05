@@ -22,9 +22,9 @@ class BotsController extends Controller
 
     public function block($bot)
     {
-        $bot = Bot::query()->find($bot);
+//        $bot = Bot::query()->find($bot);
         try {
-            BlockList::query()->create(['name'=>$bot->name]);
+            BlockList::query()->create(['name'=>$bot]);
         }catch (\Exception $e){
 
         }
