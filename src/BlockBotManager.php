@@ -26,22 +26,36 @@ class BlockBotManager extends Bot
     {
         $name = $this->agent->robot() ? $this->agent->robot() : $this->userAgent;
         $bot = Bot::query()->where('ip',request()->ip())->where('name',$name)->first();
-
-        $this->bot = Bot::query()->updateOrCreate([
-            'name'=>$this->agent->robot() ? $this->agent->robot() : $this->userAgent,
-            'ip'=>request()->ip()
-        ],
-        [
+        $data=[
             'name'=>$name,
             'ip'=>request()->ip(),
             'refer'=>request()->server('HTTP_REFERER'),
-            'captcha'=>$this->agent->robot() || (isset($bot->captcha) && $bot->captcha==0) ? false : true,
+            'agent'=>$this->userAgent,
+            'captcha'=>$this->isCaptcha(),
             'isbot'=>$this->agent->robot() ? true : false
-        ]);
+//        ]);
+        ];
+        if ($bot){
+            $updateData = collect($data)->except(['refer'])->toArray();
+            $bot->update($updateData);
+            $this->bot=$bot->fresh();
+        }else{
+            $this->bot=Bot::query()->create($data);
+        }
+    }
 
-
-
-
+    private function isCaptcha()
+    {
+        if($this->agent->robot()){
+            return false;
+        }
+        if(isset($bot->captcha) && $bot->captcha==0) {
+          return false;
+        }
+        if (request()->server('HTTP_REFERER')!=null){
+            return false;
+        }
+        return true;
     }
 
     public function counts()

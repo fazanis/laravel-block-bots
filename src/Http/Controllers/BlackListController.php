@@ -14,7 +14,6 @@ class BlackListController extends Controller
         $list = BlockList::query()->get();
         $bots = Bot::query()
             ->select('name')
-//            ->select(DB::raw("name as inc"))
             ->where('isbot',true)->groupBy('name')->get();
         $array = BlockList::query()->pluck('name')->toArray();
         return view('bots::list',compact('list','bots','array'));

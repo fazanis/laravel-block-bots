@@ -19,6 +19,7 @@ class Bot extends Model
         'block',
         'captcha',
         'isbot',
+        'agent'
     ];
 
     public function getButtonAttribute()
