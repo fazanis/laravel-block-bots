@@ -1,5 +1,14 @@
-<a href="{{route('bots.trush')}}" class="btn btn-danger" onclick="return confirm('Вы уверенны?')">Очистить</a>
-<a href="{{route('botsList.index')}}" class="btn btn-primary">Список ботов</a>
+<div class="container mt-5 mb-5">
+    <div class="d-flex align-items-center">
+        <!-- Форма с кнопкой -->
+        <form class="d-flex" action="{{route('bots.trush')}}" method="post" onclick="return confirm('Вы уверенны?')">
+            <button type="submit" class="btn btn-danger">Очистить</button>
+        </form>
+
+        <!-- Ссылка -->
+        <a href="{{route('botsList.index')}}" class="btn btn-primary ms-3">Список ботов</a>
+    </div>
+</div>
 
 <div>
     <form method="get" action="{{route('bots.index')}}">

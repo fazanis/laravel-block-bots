@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-Route::get(config('block-bots.admin_route').'/trush', [\Fazanis\LaravelBlockBots\Http\Controllers\BotsController::class,'trush'])->name('bots.trush');
+Route::post(config('block-bots.admin_route').'/trush', [\Fazanis\LaravelBlockBots\Http\Controllers\BotsController::class,'trush'])->name('bots.trush');
 Route::middleware('web')->post('/captcha',\Fazanis\LaravelBlockBots\Http\Controllers\CaptchaController::class)->name('send.captcha');
 Route::resource(config('block-bots.admin_route').'/botsList', \Fazanis\LaravelBlockBots\Http\Controllers\BlackListController::class);//->name('bots.botlist');
 Route::resource(config('block-bots.admin_route'), \Fazanis\LaravelBlockBots\Http\Controllers\BotsController::class);
