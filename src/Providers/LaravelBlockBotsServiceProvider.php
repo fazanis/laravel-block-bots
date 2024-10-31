@@ -5,6 +5,8 @@ namespace Fazanis\LaravelBlockBots\Providers;
 use Fazanis\LaravelBlockBots\BlockBotManager;
 use Fazanis\LaravelBlockBots\Console\Commands\DeleteListClientCommand;
 use Fazanis\LaravelBlockBots\Http\Middleware\BotsMiddleware;
+use Fazanis\LaravelBlockBots\Models\SortableLink;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Jenssegers\Agent\Agent;
 use Mews\Captcha\CaptchaServiceProvider;
@@ -58,5 +60,13 @@ class LaravelBlockBotsServiceProvider extends ServiceProvider
             ]);
         }
 
+        Blade::directive('sortablelink', function ($expression) {
+
+//            $collumn = ($collumn[0] === '(') ? substr($collumn, 1, -1) : $collumn;
+//            dd($collumn);
+//            dd(\Fazanis\LaravelBlockBots\Models\SortableLink::render(array ($collumn)));
+//           return (new SortableLink())->run($collumn);
+            return "<?php echo app('\Fazanis\LaravelBlockBots\Models\SortableLink')->render($expression); ?>";
+        });
     }
 }

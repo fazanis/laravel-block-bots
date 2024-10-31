@@ -14,17 +14,33 @@ class BotsController extends Controller
 {
     public function index()
     {
-
         $bots = Bot::query()
-            ->when(\request('botname'),function(Builder $q){
-                $q->where('name',\request('botname'));
+            ->when(\request('filter.botname')=='nobots',function(Builder $q){
+                $q->where('isbot',0);
             })
-            ->when(\request('captcha'),function(Builder $q){
+            ->when(\request('filter.botname') && \request('filter.botname')!='nobots',function(Builder $q){
+                $q->where('name',\request('filter.botname'));
+            })
+            ->when(\request('filter.captcha'),function(Builder $q){
                 $q->where('captcha',1);
             })
-            ->when(\request('refer'),function(Builder $q){
+            ->when(\request('filter.refer') && \request('filter.refer')=='on',function(Builder $q){
                 $q->whereNotNull('refer');
             })
+            ->when(\request('filter.refer') && \request('filter.refer')=='off',function(Builder $q){
+                $q->whereNull('refer');
+            })
+
+//            ->when(\request('filter.norefer'),function(Builder $q){
+//                $q->whereNull('refer');
+//            })
+            ->when(request()->query('sort') && str(request()->query('sort'))->contains('-'),function (Builder $builder){
+                $builder->orderByDesc(str(request()->query('sort'))->replace('-',''));
+            })
+            ->when(request()->query('sort') && !str(request()->query('sort'))->contains('-'),function (Builder $builder){
+                $builder->orderBy(request()->query('sort'));
+            })
+            ->orderByDesc('id')
             ->simplePaginate(30)->withPath(url()->full());
         $botname = Bot::query()
             ->select('name')
